@@ -113,7 +113,7 @@ const LoginScreen = ({navigation}) => {
                 <TouchableOpacity
                     style={{
                         height: 55,
-                        backgroundColor: COLORS.darkTurquoise,
+                        backgroundColor: COLORS.blue,
                         borderRadius: SIZES.radius / 5,
                         alignItems: 'center',
                         justifyContent: 'center'
