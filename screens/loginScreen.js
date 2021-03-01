@@ -16,6 +16,7 @@ const LoginScreen = ({navigation}) => {
 
     const [showPassword, setShowPassword] = React.useState(false)
 
+    /* Logo component */
     function renderLogo() {
         return (
             <View
@@ -38,6 +39,7 @@ const LoginScreen = ({navigation}) => {
         )
     }
 
+    /* Name and password form component */
     function renderForm() {
         return (
             <View
@@ -107,6 +109,7 @@ const LoginScreen = ({navigation}) => {
         )
     }
 
+    /* Login button component */
     function renderButton() {
         return (
             <View style={{ margin: SIZES.padding * 3 }}>
@@ -130,7 +133,7 @@ const LoginScreen = ({navigation}) => {
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : null}
-            style={{ flex: 1, backgroundColor: COLORS.lightGray }}
+            style={{ flex: 1, backgroundColor: COLORS.smokeWhite }}
         >                           
             <ScrollView>
                 {renderLogo()}
@@ -140,6 +143,5 @@ const LoginScreen = ({navigation}) => {
         </KeyboardAvoidingView>
     )
 }
-
 
 export default LoginScreen;

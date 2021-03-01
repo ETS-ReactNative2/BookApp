@@ -11,6 +11,7 @@ import { DrawerActions } from '@react-navigation/native';
 
 import BlogScreen from "../screens/blogScreen"
 import BlogDetailsScreen from "../screens/blogDetailsScreen"
+import BlogDetailsEditScreen from "../screens/blogDetailsEditScreen"
 import BookScreen from "../screens/bookScreen"
 import ChatScreen from "../screens/chatScreen"
 import LoginScreen from "../screens/loginScreen"
@@ -23,6 +24,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
+/* Appbar title handler */
 function getHeaderTitle(route) {  
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Feed';
 
@@ -36,6 +38,7 @@ function getHeaderTitle(route) {
   }
 }
 
+/* Drawer component */
 const AppDrawer = () => {
     return (
         <Drawer.Navigator initialRouteName="Blog">
@@ -55,6 +58,7 @@ const AppDrawer = () => {
     )
 }
 
+/* Stack component */
 const AppStack = () => {
     return (
         <Stack.Navigator 
@@ -92,21 +96,40 @@ const AppStack = () => {
                                 style={{color: COLORS.white}}
                                 />
                          </TouchableOpacity>                        
-                    ),                    
+                    ),
                   })}
             />
             
             <Stack.Screen 
                 name="Details" 
                 component={BlogDetailsScreen} 
+                options={({ navigation }) => ({
+                    title: "Blog Post",
+                    headerRight: () => (
+                        <TouchableOpacity 
+                            style={{paddingRight: SIZES.padding * 2}}
+                            onPress={() => navigation.navigate('EditDetails', {
+                                itemEdit: BlogDetailsScreen.item,
+                            })}
+                            >                            
+                            <Text style={{ fontSize: SIZES.h4, color: COLORS.white }}>Edit</Text>
+                         </TouchableOpacity>                        
+                    ),
+                })}
+            />
+
+            <Stack.Screen 
+                name="EditDetails" 
+                component={BlogDetailsEditScreen} 
                 options={{
-                    title: "Blog Post"
+                    title: "Edit Post",                    
                 }}
             />
         </Stack.Navigator>
     )
 }
 
+/* Navigation Container */
 function Navigation({navigation}){
     return (
         <NavigationContainer>

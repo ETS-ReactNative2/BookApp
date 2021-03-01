@@ -1,11 +1,9 @@
 import { Dimensions } from "react-native";
 const { width, height } = Dimensions.get("window");
 
+/* Global colors */
 export const COLORS = {
-    // base colors
-    primary: "#24C16B", // green
-    secondary: "#0C381F",   // dark green
-
+        
     green: "#66D59A",
     lightGreen: "#E6FEF0",
 
@@ -40,6 +38,7 @@ export const COLORS = {
     transparent: "transparent",
 };
 
+/* Global sizes */
 export const SIZES = {
     // global sizes
     base: 8,
@@ -65,6 +64,7 @@ export const SIZES = {
     height
 };
 
+/* Global fonts */
 export const FONTS = {
     largeTitle: { fontFamily: "System", fontSize: SIZES.largeTitle, lineHeight: 55 },
     h1: { fontFamily: "System", fontSize: SIZES.h1, lineHeight: 36 },

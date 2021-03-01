@@ -14,21 +14,21 @@ const BlogScreen = ({navigation}) => {
 
     const [blogPost, setBlogPost] = React.useState(blogPostData)
 
+    /* Header component */
     function renderBlogHeader() {
         return (
             <View style={{ flexDirection: 'row', marginVertical: SIZES.padding * 2 }}>
                 <View style={{flex: 1}}>
                     <Text style={{ ...FONTS.h1 }}>Latest Blogposts</Text>
                     <View style={{ display: 'flex', flexDirection:'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <Text style={{ ...FONTS.body2, color: COLORS.blue }}>from Alan Wicken</Text>
+                        <Text style={{ ...FONTS.body2, color: COLORS.blue }}>from Maptia</Text>
                         <TouchableOpacity
                             style={{
                                 height: 35,
                                 width: 35,
                                 justifyContent: 'center',
                                 alignItems: 'center',
-                                backgroundColor: COLORS.transparent,
-                                
+                                backgroundColor: COLORS.transparent,                                
                             }}
                         >
                             <Image
@@ -38,27 +38,23 @@ const BlogScreen = ({navigation}) => {
                                     height: 20,
                                     tintColor: COLORS.blue
                                 }}
-                            />
-
-                        
+                            />                        
                         </TouchableOpacity>
-                    </View> 
-                    
-                </View>
-
-                              
+                    </View>                     
+                </View>                              
             </View>
         )
     }
 
+    /* Blog Page main component */
     function renderBlogPage() {
-
         const BlogPostComponent = () => (
             <View>
                 {renderBlogHeader()}                          
             </View>
         )
         
+        /* Blog Post components */
         const renderItem = ({ item }) => (
             <TouchableOpacity
                 style={{

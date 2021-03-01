@@ -6,19 +6,20 @@ import {
     Image
 } from "react-native"
 
-import { COLORS, SIZES, FONTS, icons, images } from "../constants"
+import { COLORS, SIZES } from "../constants"
 
-const BlogDetailsScreen = ({route, navigation}) => {
-    /* Get the route parameter */
+const BlogDetailsScreen = ({ route }) => {
+    
+    /* Route item parameter for link post and details */
     const { item } = route.params;
     
+    /* Details main component */
     function renderDetails() {
         return (
-            <ScrollView style={{ paddingBottom: SIZES.padding *20}}>
+            <ScrollView style={{ paddingBottom: SIZES.padding * 20}}>
                 <View
                         style={{
-                            height: 260,
-                            
+                            height: 260,                            
                         }}
                     >
                         <Image
