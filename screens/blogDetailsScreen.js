@@ -1,19 +1,59 @@
 import React from "react";
 import {
+    ScrollView,
     View,
-    Text,       
+    Text,
+    Image
 } from "react-native"
 
-const BlogDetailsScreen = ({navigation}) => {
+import { COLORS, SIZES, FONTS, icons, images } from "../constants"
 
-    return (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text
-                style={{paddingBottom: 20}}
-            >Details</Text>
-            <Text                
-                onPress={() => navigation.goBack()}
-            >Go back</Text>         
+const BlogDetailsScreen = ({route, navigation}) => {
+    /* Get the route parameter */
+    const { item } = route.params;
+    
+    function renderDetails() {
+        return (
+            <ScrollView style={{ paddingBottom: SIZES.padding *20}}>
+                <View
+                        style={{
+                            height: 260,
+                            
+                        }}
+                    >
+                        <Image
+                            source={item.img}
+                            resizeMode="cover"
+                            style={{
+                                width: "100%",
+                                height: "100%",                            
+                            }}
+                        />                            
+                    </View>
+
+                <Text
+                    style={{                    
+                        paddingHorizontal: SIZES.padding * 2.35,
+                        paddingTop: SIZES.padding * 2,
+                        paddingBottom: SIZES.padding,
+                        fontSize: SIZES.h2,
+                    }}
+                >{item.title}</Text>
+                <Text
+                    style={{                    
+                        paddingHorizontal: SIZES.padding * 2.35,
+                        paddingBottom: SIZES.padding,
+                        fontSize: SIZES.body3,
+                        textAlign: "justify",
+                    }}
+                >{item.content}</Text>                    
+            </ScrollView>
+        )
+    }
+
+    return (        
+        <View style={{ flex: 1, backgroundColor: COLORS.smokeWhite, paddingBottom: SIZES.padding * 3 }}>
+            {renderDetails()}
         </View>
     )
 }

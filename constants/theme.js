@@ -30,7 +30,7 @@ export const COLORS = {
     white: "#FFFFFF",
     smokeWhite: "E8E8E8",
 
-    lightGray: "#E8E8E8",
+    lightGray: "#E0E0E0",
     mediumGray: "#383838",
     darkgray: "#111111",
 

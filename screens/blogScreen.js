@@ -7,7 +7,7 @@ import {
     FlatList,    
 } from "react-native"
 
-import { COLORS, SIZES, FONTS, icons, images } from "../constants"
+import { COLORS, SIZES, FONTS, icons } from "../constants"
 import blogPostData from "../constants/blogData"
 
 const BlogScreen = ({navigation}) => {
@@ -65,18 +65,20 @@ const BlogScreen = ({navigation}) => {
                     marginVertical: SIZES.base,
                     width: SIZES.width /1.18,                    
                 }}
-                onPress={() => navigation.navigate('Details')}
+                /* Navigate to the Details */
+                onPress={() => navigation.navigate('Details', {
+                    item: item,
+                })}
             >
                 <View
                     style={{
-                        height: 80,
+                        height: 120,
                         borderTopLeftRadius: 20,
-                        borderTopRightRadius: 20,
-                        backgroundColor: COLORS.transparent
+                        borderTopRightRadius: 20,                        
                     }}
-                >
-                    <Image                        
-                        source={item.img}                        
+                >                    
+                    <Image
+                        source={item.img}
                         resizeMode="cover"
                         style={{
                             width: "100%",
@@ -84,19 +86,19 @@ const BlogScreen = ({navigation}) => {
                             borderTopLeftRadius: 20,
                             borderTopRightRadius: 20
                         }}
-                    />                
+                    />
                 </View>
 
                 <View
                     style={{
-                        padding: SIZES.padding,
+                        padding: SIZES.padding * 1.2,
                         backgroundColor: COLORS.lightGray,
                         borderBottomLeftRadius: 20,
                         borderBottomRightRadius: 20
                     }}
                 >
-                    <Text style={{ ...FONTS.h4 }}>{item.title}</Text>
-                    <Text style={{ ...FONTS.body4 }}>{item.description}</Text>
+                    <Text style={{ ...FONTS.h3, paddingBottom: SIZES.padding / 2, color: COLORS.darkgray }}>{item.title}</Text>
+                    <Text style={{ ...FONTS.body4, paddingBottom: SIZES.padding / 2, color: COLORS.mediumGray }}>{item.description}</Text>
 
                 </View>
             </TouchableOpacity>
@@ -120,9 +122,9 @@ const BlogScreen = ({navigation}) => {
     }
 
     return (
-        <View style={{ flex: 1, backgroundColor: COLORS.white, paddingBottom: SIZES.padding * 3 }}>
-            {renderBlogPage()}            
-        </View>        
+        <View style={{ flex: 1, backgroundColor: COLORS.smokeWhite, paddingBottom: SIZES.padding * 3 }}>
+            {renderBlogPage()}
+        </View>
     )
 }
 

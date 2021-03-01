@@ -130,7 +130,7 @@ const LoginScreen = ({navigation}) => {
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : null}
-            style={{ flex: 1, backgroundColor: COLORS.smokeWhite }}
+            style={{ flex: 1, backgroundColor: COLORS.lightGray }}
         >                           
             <ScrollView>
                 {renderLogo()}
