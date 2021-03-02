@@ -5,29 +5,32 @@ import {
     View,
     Text,
     Image,
-    TouchableOpacity,
+    TouchableOpacity,    
+    
 } from "react-native"
 
-/* Redux imports */
+/* Redux imports 
 import { useSelector, useDispatch } from 'react-redux'
 import { addBlogPost, deleteBlogPost } from '../reducer/booksApp'
+*/
 
 /* Constant imports */
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { COLORS, SIZES } from "../constants"
 
 const BlogDetailsScreen = ({ route, navigation }) => {
+    
     React.useEffect(() => {
         if (route.params?.postTitle) {
-          // Post updated, do something with `route.params.post`
-          // For example, send the post to the server
+          // Post updated, do something with `route.params.post` (eg.: send the post to the server)        
         }
       }, [route.params?.postTitle]);
          
     /* Route item parameter for link post and details */
     const { item } = route.params;
-    
-    /* Redux consts */
+   
+   
+    /* Redux consts 
     const blogs = useSelector(state => state)
     const dispatch = useDispatch()
 
@@ -37,8 +40,8 @@ const BlogDetailsScreen = ({ route, navigation }) => {
     }
 
     const deleteBlog = id => dispatch(deleteBlogPost(id))
-
-
+    */
+    
     function renderEditScreen() {
         return (
             <TouchableOpacity 
@@ -93,6 +96,7 @@ const BlogDetailsScreen = ({ route, navigation }) => {
                             fontSize: SIZES.h2,
                         }}
                     >
+                        
                         {route.params.postTitle ? route.params.postTitle : item.title}
                     </Text>
                     {renderEditScreen()}                    
@@ -125,8 +129,8 @@ const BlogDetailsScreen = ({ route, navigation }) => {
     }
 
     return (        
-        <View style={{ flex: 1, backgroundColor: COLORS.smokeWhite, paddingBottom: SIZES.padding * 3 }}>            
-            {renderDetails()}
+        <View style={{ flex: 1, backgroundColor: COLORS.smokeWhite, paddingBottom: SIZES.padding * 3 }}>                    
+            {renderDetails()}            
         </View>
     )
 }

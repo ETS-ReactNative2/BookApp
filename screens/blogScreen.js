@@ -65,7 +65,8 @@ const BlogScreen = ({navigation}) => {
                 onPress={() => navigation.navigate('Details', {
                     item: item,
                 })}
-            >
+            >   
+                {/* Image */}
                 <View
                     style={{
                         height: 120,
@@ -84,7 +85,8 @@ const BlogScreen = ({navigation}) => {
                         }}
                     />
                 </View>
-
+                
+                {/* Title and description */}
                 <View
                     style={{
                         padding: SIZES.padding * 1.2,

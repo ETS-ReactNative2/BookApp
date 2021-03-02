@@ -30,17 +30,15 @@ const BlogDetailsEditScreen = ({ route, navigation }) => {
     const { editItem } = route.params;
 
     /* Hooks */
-    const [postText, setPostText] = React.useState('');
-    const [blogPost, setBlogPost] = React.useState(blogPostData)
-
-    const [labels, setLabels] = React.useState([])
     const [selectedLabel, setSelectedLabel] = React.useState(null)
     const [modalVisible, setModalVisible] = React.useState(false)
+
+    const [postText, setPostText] = React.useState('');    
 
     /* Edit Title Form component */
     function renderEditTitleForm() {
         return (    
-            <View style={{ marginVertical: SIZES.padding * 2, marginHorizontal: SIZES.padding * 2}}>
+            <View style={{ marginTop: SIZES.padding * 4, marginHorizontal: SIZES.padding * 2}}>
                 <Text style={{ color: COLORS.darkgray, ...FONTS.body3 }}>Add new post title:</Text>
                 <TextInput
                     style={{
@@ -67,7 +65,7 @@ const BlogDetailsEditScreen = ({ route, navigation }) => {
     /* Form component */
     function renderForm() {
         return (
-            <View style={{ marginTop: SIZES.padding, marginHorizontal: SIZES.padding * 2 }}>
+            <View style={{ marginTop: SIZES.padding * 2, marginHorizontal: SIZES.padding * 2 }}>
                 <Text style={{ color: COLORS.darkgray, ...FONTS.body3, paddingBottom: SIZES.padding }}>Select post label:</Text>
                 <View style={{flexDirection: 'row'}}>                    
                     {/* Labels */}                    
@@ -86,7 +84,7 @@ const BlogDetailsEditScreen = ({ route, navigation }) => {
                         onPress={() => setModalVisible(true)}
                     >
                         <View style={{ justifyContent: 'center' }}>
-                            <Text>{selectedLabel?.name}</Text>
+                            <Text>{selectedLabel?.name ? selectedLabel.name : editItem.label}</Text>
                         </View>
 
                         <View style={{ justifyContent: 'center', marginRight: SIZES.padding }}>
@@ -102,7 +100,6 @@ const BlogDetailsEditScreen = ({ route, navigation }) => {
         )
     }
     
-
     /* Label modal component - drop-down list */
     function renderLabelModal() {
 
@@ -114,11 +111,14 @@ const BlogDetailsEditScreen = ({ route, navigation }) => {
                         setSelectedLabel(item)
                         setModalVisible(false)                                                
                         blogPostData[editItem.id-1].label = item.name
-                        setPostText = item.name
                     }}
                 >                   
-                    <Text style={{ color: COLORS.black, ...FONTS.body3, paddingLeft: SIZES.padding }}>{item.name}</Text>
-
+                    <Text 
+                        style={{ 
+                            color: COLORS.white, 
+                            ...FONTS.body3, 
+                            paddingLeft: 
+                            SIZES.padding }}>{item.name}</Text>
                 </TouchableOpacity>
             )
         }
@@ -136,9 +136,10 @@ const BlogDetailsEditScreen = ({ route, navigation }) => {
                         <View
                             style={{
                                 height: 170,
-                                width: SIZES.width * 0.9,
-                                backgroundColor: COLORS.lightBlue,
-                                borderRadius: SIZES.radius
+                                width: SIZES.width * 0.91,
+                                backgroundColor: COLORS.blue,
+                                borderRadius: 6,
+                                
                             }}
                         >
                             <FlatList
@@ -154,21 +155,34 @@ const BlogDetailsEditScreen = ({ route, navigation }) => {
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
-
             </Modal>
         )
     }
 
     function renderSaveButton() {
         return (
-            <Button
-                title="Done"
-                onPress={() => {
-                // Pass params back to home screen
-                navigation.navigate('Details', { postTitle: postText });
+            <View 
+                style={{ 
+                    marginHorizontal: SIZES.padding * 2,
+                    marginTop: SIZES.padding * 5,                     
+                    justifyContent: 'center',
+                    height: 50,
+                    borderRadius: 6, 
+                    backgroundColor: COLORS.blue,
+                    
                 }}
-            />
-
+            >
+                <Button
+                    title="Save post"
+                    disabled = {postText == '' ? true: false}
+                    color={COLORS.white}                    
+                    onPress={() => {
+                        blogPostData[editItem.id-1].title = postText
+                        // Pass params back to home screen
+                        navigation.navigate('Details', { postTitle: postText });                    
+                    }}
+                />
+            </View>            
         )
     }
     
