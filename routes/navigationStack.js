@@ -1,14 +1,21 @@
+/* React imports */
 import React from 'react';
 import {
     TouchableOpacity,
     Text    
 } from "react-native"
 
+/* Redux import */
+import { Provider as StoreProvider } from 'react-redux'
+import store from '../reducer/store'
+
+/* Navigation imports */
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, HeaderHeightContext } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerActions } from '@react-navigation/native';
 
+/* Screen imports */
 import BlogScreen from "../screens/blogScreen"
 import BlogDetailsScreen from "../screens/blogDetailsScreen"
 import BlogDetailsEditScreen from "../screens/blogDetailsEditScreen"
@@ -18,6 +25,7 @@ import LoginScreen from "../screens/loginScreen"
 
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
+/* Constant imports */
 import { COLORS, SIZES, FONTS } from "../constants"
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
@@ -98,23 +106,12 @@ const AppStack = () => {
                          </TouchableOpacity>                        
                     ),
                   })}
-            />
-            
+            />                        
             <Stack.Screen 
                 name="Details" 
                 component={BlogDetailsScreen} 
                 options={({ navigation }) => ({
-                    title: "Blog Post",
-                    headerRight: () => (
-                        <TouchableOpacity 
-                            style={{paddingRight: SIZES.padding * 2}}
-                            onPress={() => navigation.navigate('EditDetails', {
-                                itemEdit: BlogDetailsScreen.item,
-                            })}
-                            >                            
-                            <Text style={{ fontSize: SIZES.h4, color: COLORS.white }}>Edit</Text>
-                         </TouchableOpacity>                        
-                    ),
+                    title: "Blog Post",                    
                 })}
             />
 
@@ -124,7 +121,7 @@ const AppStack = () => {
                 options={{
                     title: "Edit Post",                    
                 }}
-            />
+            />            
         </Stack.Navigator>
     )
 }
@@ -132,9 +129,11 @@ const AppStack = () => {
 /* Navigation Container */
 function Navigation({navigation}){
     return (
-        <NavigationContainer>
-            <AppStack/>
-        </NavigationContainer>
+        <StoreProvider store = {store}>
+            <NavigationContainer>
+                <AppStack/>
+            </NavigationContainer>
+        </StoreProvider>
     )
 }
 
