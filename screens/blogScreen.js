@@ -4,7 +4,8 @@ import {
     Text,
     Image,
     TouchableOpacity,
-    FlatList,    
+    FlatList,
+    StyleSheet
 } from "react-native"
 
 import { COLORS, SIZES, FONTS, icons } from "../constants"
@@ -18,26 +19,14 @@ const BlogScreen = ({navigation}) => {
     function renderBlogHeader() {
         return (
             <View style={{ flexDirection: 'row', marginVertical: SIZES.padding * 2 }}>
-                <View style={{flex: 1}}>
-                    <Text style={{ ...FONTS.h1 }}>Latest Blogposts</Text>
-                    <View style={{ display: 'flex', flexDirection:'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                <View style={styles.blogScreenHeaderViewStyle}>
+                    <Text style={styles.blogScreenHeaderTitleTextStyle}>Latest Blogposts</Text>
+                    <View style={styles.blogScreenHeaderRowViewStyle}>
                         <Text style={{ ...FONTS.body2, color: COLORS.blue }}>from Maptia</Text>
-                        <TouchableOpacity
-                            style={{
-                                height: 35,
-                                width: 35,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: COLORS.transparent,                                
-                            }}
-                        >
+                        <TouchableOpacity style={styles.blogScreenHeaderInfoTouchableStyle}>
                             <Image
                                 source={icons.info}
-                                style={{
-                                    width: 20,
-                                    height: 20,
-                                    tintColor: COLORS.blue
-                                }}
+                                style={styles.blogScreenHeaderInfoIconStyle}
                             />                        
                         </TouchableOpacity>
                     </View>                     
@@ -57,52 +46,36 @@ const BlogScreen = ({navigation}) => {
         /* Blog Post components */
         const renderItem = ({ item }) => (
             <TouchableOpacity
-                style={{
-                    marginVertical: SIZES.base,
-                    width: SIZES.width /1.18,                    
-                }}
+                style={styles.blogScreenBlogPostTouchableStyle}
+
                 /* Navigate to the Details */
                 onPress={() => navigation.navigate('Details', {
                     item: item,
                 })}
             >   
                 {/* Image */}
-                <View
-                    style={{
-                        height: 120,
-                        borderTopLeftRadius: 20,
-                        borderTopRightRadius: 20,                        
-                    }}
-                >                    
+                <View style={styles.blogScreenBlogPostImageViewStyle}>                    
                     <Image
                         source={item.img}
                         resizeMode="cover"
-                        style={{
-                            width: "100%",
-                            height: "100%",
-                            borderTopLeftRadius: 20,
-                            borderTopRightRadius: 20
-                        }}
+                        style={styles.blogScreenBlogPostImageStyle}
                     />
                 </View>
                 
                 {/* Title and description */}
-                <View
-                    style={{
-                        padding: SIZES.padding * 1.2,
-                        backgroundColor: COLORS.lightGray,
-                        borderBottomLeftRadius: 20,
-                        borderBottomRightRadius: 20
-                    }}
-                >
-                    <Text style={{ ...FONTS.h3, paddingBottom: SIZES.padding / 2, color: COLORS.darkgray }}>{item.title}</Text>
-                    <Text style={{ ...FONTS.body4, paddingBottom: SIZES.padding / 2, color: COLORS.mediumGray }}>{item.description}</Text>
-
+                <View style={styles.blogScreenBlogPostContentStyle}>
+                    <Text style={styles.blogScreenBlogPostTitleTextStyle}>
+                        {item.title}
+                    </Text>
+                    <Text style={styles.blogScreenBlogPostDescriptionTextStyle}>
+                        {item.description}
+                    </Text>
                 </View>
             </TouchableOpacity>
         )
 
         return (
+            /* Blog Posts in list */
             <FlatList
                 ListHeaderComponent={BlogPostComponent}
                 contentContainerStyle={{ paddingHorizontal: SIZES.padding * 3 }}
@@ -125,5 +98,64 @@ const BlogScreen = ({navigation}) => {
         </View>
     )
 }
+
+/* Blog screen style elements */
+const styles = StyleSheet.create({
+    blogScreenHeaderViewStyle: {
+        flex: 1,
+    },
+    blogScreenHeaderTitleTextStyle: {
+        ...FONTS.h1
+    },
+    blogScreenHeaderRowViewStyle: {
+        display: 'flex', 
+        flexDirection:'row', 
+        alignItems: 'center', 
+        justifyContent: 'space-between' 
+    },
+    blogScreenHeaderInfoTouchableStyle: {
+        height: 35,
+        width: 35,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: COLORS.transparent,
+    },
+    blogScreenHeaderInfoIconStyle: {
+        width: 20,
+        height: 20,
+        tintColor: COLORS.blue
+    },
+    blogScreenBlogPostTouchableStyle: {
+        marginVertical: SIZES.base,
+        width: SIZES.width /1.18,
+    },
+    blogScreenBlogPostImageViewStyle: {
+        height: 120,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+    },
+    blogScreenBlogPostImageStyle: {
+        width: "100%",
+        height: "100%",
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20
+    },
+    blogScreenBlogPostContentStyle: {
+        padding: SIZES.padding * 1.2,
+        backgroundColor: COLORS.lightGray,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20        
+    },
+    blogScreenBlogPostTitleTextStyle: {
+        ...FONTS.h3, 
+        paddingBottom: SIZES.padding / 2, 
+        color: COLORS.darkgray
+    },
+    blogScreenBlogPostDescriptionTextStyle: {
+        ...FONTS.body4, 
+        paddingBottom: SIZES.padding / 2, 
+        color: COLORS.mediumGray
+    }
+})
 
 export default BlogScreen;

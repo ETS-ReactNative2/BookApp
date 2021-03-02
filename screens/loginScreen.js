@@ -7,34 +7,26 @@ import {
     TouchableOpacity,
     KeyboardAvoidingView,
     Platform,
-    ScrollView    
+    ScrollView,
+    StyleSheet    
 } from "react-native"
 
 import { COLORS, SIZES, FONTS, icons, images } from "../constants"
 
 const LoginScreen = ({navigation}) => {
 
+    /* Hooks */
     const [showPassword, setShowPassword] = React.useState(false)
 
     /* Logo component */
     function renderLogo() {
         return (
-            <View
-                style={{
-                    marginTop: SIZES.padding * 15,
-                    height: 100,
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}
-            >
+            <View style={styles.loginScreenLogoViewStyle}>
                 <Image
                     source={images.logo}
                     resizeMode="contain"
-                    style={{
-                        width: "60%"
-                    }}
+                    style={styles.logoScreenLogoImageStyle}
                 />
-
             </View>
         )
     }
@@ -42,24 +34,15 @@ const LoginScreen = ({navigation}) => {
     /* Name and password form component */
     function renderForm() {
         return (
-            <View
-                style={{
-                    marginTop: SIZES.padding * 3,
-                    marginHorizontal: SIZES.padding * 3 
-                }}
-            >
+            <View style={styles.loginScreenFormViewStyle}>
+
                 {/* Username */}
-                <View style={{ marginTop: SIZES.padding * 10}}>
-                    <Text style={{ color: COLORS.darkgray, ...FONTS.body3 }}>Username</Text>
+                <View>
+                    <Text style={styles.loginScreenFormUsernameTextStyle}>
+                        Username
+                    </Text>
                     <TextInput
-                        style={{
-                            marginVertical: SIZES.padding,
-                            borderBottomColor: COLORS.darkgray,
-                            borderBottomWidth: 1,
-                            height: 40,
-                            color: COLORS.mediumGray,
-                            ...FONTS.body3
-                        }}
+                        style={styles.loginScreenFormUsernameTextInputStyle}                        
                         placeholder="Enter Username"
                         placeholderTextColor={COLORS.mediumGray}
                         selectionColor={COLORS.mediumGray}
@@ -67,17 +50,10 @@ const LoginScreen = ({navigation}) => {
                 </View>
 
                 {/* Password */}
-                <View style={{ marginTop: SIZES.padding * 3}}>
-                    <Text style={{ color: COLORS.darkgray, ...FONTS.body3, }}>Password</Text>
+                <View style={styles.loginScreenFormPasswordViewStyle}>
+                    <Text style={styles.loginScreenFormPasswordTextStyle}>Password</Text>
                     <TextInput
-                        style={{                                    
-                            marginVertical: SIZES.padding,
-                            borderBottomColor: COLORS.darkgray,
-                            borderBottomWidth: 1,
-                            height: 40,
-                            color: COLORS.mediumGray,
-                            ...FONTS.body3,
-                        }}
+                        style={styles.loginScreenFormPasswordTextInputStyle}
                         placeholder="Enter Password"
                         placeholderTextColor={COLORS.mediumGray}
                         selectionColor={COLORS.mediumGray}                            
@@ -85,24 +61,13 @@ const LoginScreen = ({navigation}) => {
                     />
 
                     <TouchableOpacity
-                        style={{ 
-                            position: 'absolute',
-                            right: 0,
-                            bottom: 10,
-                            height: 30,
-                            width: 30,
-                        }}
+                        style={styles.loginScreenFormPasswordTouchableStyle}
                         onPress={() => setShowPassword(!showPassword)}
                     >
                         <Image
                             source={showPassword ? icons.disable_eye : icons.eye}
-                            style={{
-                                height: 20,
-                                width: 20,
-                                tintColor: COLORS.darkgray
-                            }}
+                            style={styles.loginScreenFormPasswordImageStyle}
                         />
-
                     </TouchableOpacity>
                 </View>
             </View>
@@ -114,17 +79,10 @@ const LoginScreen = ({navigation}) => {
         return (
             <View style={{ margin: SIZES.padding * 3 }}>
                 <TouchableOpacity
-                    style={{
-                        height: 55,
-                        backgroundColor: COLORS.blue,
-                        borderRadius: SIZES.radius / 5,
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                    }}
+                    style={styles.loginScreenButtonStyle}
                     onPress={() => navigation.navigate("Drawer")}
                 >
-                    <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Login</Text>
-
+                    <Text style={styles.loginScreenButtonTextStyle}>Login</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -133,7 +91,8 @@ const LoginScreen = ({navigation}) => {
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : null}
-            style={{ flex: 1, backgroundColor: COLORS.smokeWhite }}
+            style={{ flex: 1 }}
+            backgroundColor={COLORS.smokeWhite}
         >                           
             <ScrollView>
                 {renderLogo()}
@@ -143,5 +102,71 @@ const LoginScreen = ({navigation}) => {
         </KeyboardAvoidingView>
     )
 }
+
+/* Login screen style elements */
+const styles = StyleSheet.create({
+    loginScreenLogoViewStyle: {
+        height: 100,
+        marginVertical: SIZES.padding * 14,        
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    logoScreenLogoImageStyle: {
+        width: "58%"
+    },
+    loginScreenFormViewStyle: {        
+        marginHorizontal: SIZES.padding * 3
+    },
+    loginScreenFormUsernameTextStyle: {
+        color: COLORS.darkgray, 
+        ...FONTS.body3
+    },
+    loginScreenFormUsernameTextInputStyle: {
+        marginVertical: SIZES.padding,
+        borderBottomColor: COLORS.darkgray,
+        borderBottomWidth: 1,
+        height: 40,
+        color: COLORS.mediumGray,
+        ...FONTS.body3
+    },
+    loginScreenFormPasswordViewStyle: {
+        marginTop: SIZES.padding * 3
+    },
+    loginScreenFormPasswordTextStyle: {
+        color: COLORS.darkgray, 
+        ...FONTS.body3,
+    },
+    loginScreenFormPasswordTextInputStyle: {
+        marginVertical: SIZES.padding,
+        borderBottomColor: COLORS.darkgray,
+        borderBottomWidth: 1,
+        height: 40,
+        color: COLORS.mediumGray,
+        ...FONTS.body3,
+    },
+    loginScreenFormPasswordTouchableStyle: {
+        position: 'absolute',
+        right: 0,
+        bottom: 10,
+        height: 30,
+        width: 30,
+    },
+    loginScreenFormPasswordImageStyle: {
+        height: 20,
+        width: 20,
+        tintColor: COLORS.darkgray
+    },
+    loginScreenButtonStyle: {
+        height: 55,
+        backgroundColor: COLORS.blue,
+        borderRadius: SIZES.radius / 5,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    loginScreenButtonTextStyle: {
+        color: COLORS.white, 
+        ...FONTS.h3
+    }
+})
 
 export default LoginScreen;

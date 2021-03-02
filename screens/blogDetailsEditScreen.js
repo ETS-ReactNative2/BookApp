@@ -9,7 +9,8 @@ import {
     FlatList,
     KeyboardAvoidingView,
     TouchableOpacity,
-    Button
+    Button,
+    StyleSheet
 
 } from "react-native"
 
@@ -41,17 +42,7 @@ const BlogDetailsEditScreen = ({ route, navigation }) => {
             <View style={{ marginTop: SIZES.padding * 4, marginHorizontal: SIZES.padding * 2}}>
                 <Text style={{ color: COLORS.darkgray, ...FONTS.body3 }}>Add new post title:</Text>
                 <TextInput
-                    style={{
-                        height: 50,
-                        marginVertical: SIZES.padding,
-                        paddingHorizontal: SIZES.padding, 
-                        paddingLeft: SIZES.padding * 2,
-                        borderColor: COLORS.mediumGray,
-                        borderWidth: 1,
-                        borderRadius: 6,                                                                    
-                        backgroundColor: COLORS.lightGray,
-                        ...FONTS.body3
-                    }}
+                    style={styles.editScreenTextInputStyle}
                     placeholder={editItem.title}
                     placeholderTextColor={COLORS.mediumGray}
                     selectionColor={COLORS.mediumGray}
@@ -70,28 +61,18 @@ const BlogDetailsEditScreen = ({ route, navigation }) => {
                 <View style={{flexDirection: 'row'}}>                    
                     {/* Labels */}                    
                     <TouchableOpacity
-                        style={{
-                            width: SIZES.width * 0.9,
-                            height: 50,                                                       
-                            paddingLeft: SIZES.padding * 2,
-                            borderColor: COLORS.mediumGray,
-                            borderWidth: 1,
-                            borderRadius: 6,
-                            flexDirection: 'row',
-                            backgroundColor: COLORS.lightGray,
-                            justifyContent: 'space-between',
-                        }}
+                        style={styles.editScreenTouchableStyle}
                         onPress={() => setModalVisible(true)}
                     >
                         <View style={{ justifyContent: 'center' }}>
                             <Text>{selectedLabel?.name ? selectedLabel.name : editItem.label}</Text>
                         </View>
 
-                        <View style={{ justifyContent: 'center', marginRight: SIZES.padding }}>
+                        <View style={styles.editScreenIconStyle}>
                             <FontAwesome 
                                 name="chevron-down" 
-                                size={20}
-                                style={{color: COLORS.mediumGray}}
+                                size={13}
+                                style={{}}
                             />
                         </View>                                                                    
                     </TouchableOpacity>                           
@@ -114,11 +95,7 @@ const BlogDetailsEditScreen = ({ route, navigation }) => {
                     }}
                 >                   
                     <Text 
-                        style={{ 
-                            color: COLORS.white, 
-                            ...FONTS.body3, 
-                            paddingLeft: 
-                            SIZES.padding }}>{item.name}</Text>
+                        style={styles.editScreenDropDownTextStyle}>{item.name}</Text>
                 </TouchableOpacity>
             )
         }
@@ -134,23 +111,14 @@ const BlogDetailsEditScreen = ({ route, navigation }) => {
                 >
                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                         <View
-                            style={{
-                                height: 170,
-                                width: SIZES.width * 0.91,
-                                backgroundColor: COLORS.blue,
-                                borderRadius: 6,
-                                
-                            }}
+                            style={styles.editScreenDropDownStyle}
                         >
                             <FlatList
                                 data={labelCategory}
                                 renderItem={renderItem}
                                 keyExtractor={item => `${item.name}`}
                                 showsVerticalScrollIndicator={false}
-                                style={{
-                                    padding: SIZES.padding * 2,
-                                    marginBottom: SIZES.padding * 2,                                    
-                                }}
+                                style={styles.editScreenDropDownFlatListStyle}
                             />                            
                         </View>
                     </View>
@@ -162,15 +130,7 @@ const BlogDetailsEditScreen = ({ route, navigation }) => {
     function renderSaveButton() {
         return (
             <View 
-                style={{ 
-                    marginHorizontal: SIZES.padding * 2,
-                    marginTop: SIZES.padding * 5,                     
-                    justifyContent: 'center',
-                    height: 50,
-                    borderRadius: 6, 
-                    backgroundColor: COLORS.blue,
-                    
-                }}
+                style={styles.editScreenButtonStyle}
             >
                 <Button
                     title="Save post"
@@ -201,5 +161,59 @@ const BlogDetailsEditScreen = ({ route, navigation }) => {
         </KeyboardAvoidingView>
     )
 }
+
+/* Edit screen style elements */
+const styles = StyleSheet.create({
+    editScreenTextInputStyle: {
+        height: 50,
+        marginVertical: SIZES.padding,
+        paddingHorizontal: SIZES.padding, 
+        paddingLeft: SIZES.padding * 2,
+        borderColor: COLORS.mediumGray,
+        borderWidth: 1,
+        borderRadius: 6,                  
+        backgroundColor: COLORS.lightGray,
+        ...FONTS.body3
+    },
+    editScreenTouchableStyle: {
+        width: SIZES.width * 0.9,
+        height: 50,
+        paddingLeft: SIZES.padding * 2,
+        borderColor: COLORS.mediumGray,
+        borderWidth: 1,
+        borderRadius: 6,
+        flexDirection: 'row',
+        backgroundColor: COLORS.lightGray,
+        justifyContent: 'space-between',
+    },
+    editScreenIconStyle: {
+        justifyContent: 'center', 
+        marginRight: SIZES.padding 
+    },
+    editScreenDropDownStyle: {
+        height: 170,
+        width: SIZES.width * 0.91,
+        backgroundColor: COLORS.blue,
+        borderRadius: 6,
+    },
+    editScreenDropDownFlatListStyle: {
+        padding: SIZES.padding * 2,
+        marginBottom: SIZES.padding * 2,
+    },
+    editScreenDropDownTextStyle: {
+        color: COLORS.white, 
+        ...FONTS.body3, 
+        paddingLeft: 
+        SIZES.padding 
+    },
+    editScreenButtonStyle: {
+        marginHorizontal: SIZES.padding * 2,
+        marginTop: SIZES.padding * 5,                     
+        justifyContent: 'center',
+        height: 50,
+        borderRadius: 6, 
+        backgroundColor: COLORS.blue,
+    }
+})
 
 export default BlogDetailsEditScreen;

@@ -5,7 +5,8 @@ import {
     View,
     Text,
     Image,
-    TouchableOpacity,    
+    TouchableOpacity,
+    StyleSheet 
     
 } from "react-native"
 
@@ -28,7 +29,6 @@ const BlogDetailsScreen = ({ route, navigation }) => {
          
     /* Route item parameter for link post and details */
     const { item } = route.params;
-   
    
     /* Redux consts 
     const blogs = useSelector(state => state)
@@ -63,66 +63,32 @@ const BlogDetailsScreen = ({ route, navigation }) => {
     function renderDetails() {
         return (
             <ScrollView style={{ paddingBottom: SIZES.padding * 20}}>
+
                 {/* Image */}
-                <View
-                    style={{
-                        height: 260,                            
-                    }}
-                >
+                <View style={styles.detailsScreenImageViewStyle}>
                     <Image
                         source={item.img}
                         resizeMode="cover"
-                        style={{
-                            width: "100%",
-                            height: "100%",                            
-                        }}
+                        style={styles.detailsScreenImageStyle}
                     />                            
                 </View>
 
                 {/* Blog Post Title */}
-                <View
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        justifyContent: "space-between",
-                        alignItems: 'center'
-                    }}
-                >
-                    <Text
-                        style={{                    
-                            paddingHorizontal: SIZES.padding * 2.35,
-                            paddingTop: SIZES.padding * 2,
-                            paddingBottom: SIZES.padding,
-                            fontSize: SIZES.h2,
-                        }}
-                    >
-                        
+                <View style={styles.detailsScreenTitleViewStyle}>
+                    <Text style={styles.detailsScreenTitleTextStyle}>
                         {route.params.postTitle ? route.params.postTitle : item.title}
                     </Text>
                     {renderEditScreen()}                    
                 </View>
 
                 {/* Blog Post Label */}
-                <Text 
-                    style={{ 
-                        paddingHorizontal: SIZES.padding * 2.35, 
-                        paddingBottom: SIZES.padding,
-                        fontSize: SIZES.body3,
-                        fontWeight: "700",
-                        color: COLORS. darkTurquoise
-                    }}
-                >
+                <Text style={styles.detailsScreenLabelTextStyle}>
                     {item.label}
                 </Text>
 
                 {/* Blog Post Content */}
                 <Text
-                    style={{                    
-                        paddingHorizontal: SIZES.padding * 2.35,
-                        paddingBottom: SIZES.padding,
-                        fontSize: SIZES.body3,
-                        textAlign: "justify",
-                    }}
+                    style={styles.detailsScreenContentTextStyle}
                 >{item.content}</Text>                    
             </ScrollView>
         )
@@ -134,5 +100,42 @@ const BlogDetailsScreen = ({ route, navigation }) => {
         </View>
     )
 }
+
+
+/* Details screen style elements */
+const styles = StyleSheet.create({
+    detailsScreenImageViewStyle: {
+        height: 260,
+    },
+    detailsScreenImageStyle: {
+        width: "100%",
+        height: "100%", 
+    },
+    detailsScreenTitleViewStyle: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: "space-between",
+        alignItems: 'center'
+    },
+    detailsScreenTitleTextStyle: {
+        paddingHorizontal: SIZES.padding * 2.35,
+        paddingTop: SIZES.padding * 2,
+        paddingBottom: SIZES.padding,
+        fontSize: SIZES.h2,
+    },
+    detailsScreenLabelTextStyle: {
+        paddingHorizontal: SIZES.padding * 2.35, 
+        paddingBottom: SIZES.padding,
+        fontSize: SIZES.body3,
+        fontWeight: "700",
+        color: COLORS. darkTurquoise
+    },
+    detailsScreenContentTextStyle: {
+        paddingHorizontal: SIZES.padding * 2.35,
+        paddingBottom: SIZES.padding,
+        fontSize: SIZES.body3,
+        textAlign: "justify",
+    }
+})
 
 export default BlogDetailsScreen;
