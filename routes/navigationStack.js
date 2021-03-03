@@ -20,6 +20,7 @@ import BlogScreen from "../screens/blogScreen"
 import BlogDetailsScreen from "../screens/blogDetailsScreen"
 import BlogDetailsEditScreen from "../screens/blogDetailsEditScreen"
 import BookScreen from "../screens/bookScreen"
+import BookMarkScreen from "../screens/bookBookMarkScreen"
 import ChatMessagesScreen from "../screens/chatMessagesScreen"
 import ChatMessageBoardScreen from "../screens/chatMessageBoardScreen"
 import LoginScreen from "../screens/loginScreen"
@@ -35,16 +36,37 @@ const Drawer = createDrawerNavigator();
 
 /* Appbar title handler */
 function getHeaderTitle(route) {  
-  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Feed';
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Blog';
 
   switch (routeName) {
     case 'Blog':
       return 'Blog';
     case 'Book':
-      return 'Book';
+      return 'Books';
     case 'Messages':
       return 'Messages';
   }
+}
+
+/* Bookmark page naviagtion handler */
+function getBookmarkNavigator(route, navigation) {
+    const routeName = getFocusedRouteNameFromRoute(route) ?? 'Blog';
+
+    switch (routeName) {        
+        case 'Book':
+        return (
+            <TouchableOpacity 
+                style={{paddingLeft: SIZES.padding * 2}}
+                onPress={() => navigation.navigate('BookMark')}
+            >                            
+                <FontAwesome 
+                    name="bookmark" 
+                    size={22}
+                    style={{color: COLORS.white, paddingRight: SIZES.padding * 2}}
+                />
+            </TouchableOpacity>
+        );        
+    }
 }
 
 /* Drawer component */
@@ -57,7 +79,7 @@ const AppDrawer = () => {
             />
             <Drawer.Screen 
                 name="Book" 
-                component={BookScreen}                                 
+                component={BookScreen}                                                    
             />
             <Drawer.Screen 
                 name="Messages" 
@@ -83,13 +105,13 @@ const AppStack = () => {
             }}            
         >
             <Stack.Screen 
-                name="Login" 
+                name="Login"
                 component={LoginScreen}
-                options={{ title: 'Login'}}                
+                options={{ title: 'Login'}}
             />
 
             <Stack.Screen 
-                name="Drawer" 
+                name="Drawer"
                 component={AppDrawer}
                 options={({ route, navigation }) => ({
                     title: '',
@@ -106,6 +128,9 @@ const AppStack = () => {
                             />
                          </TouchableOpacity>                        
                     ),
+                    headerRight: () => (
+                        getBookmarkNavigator(route, navigation)
+                    )
                   })}
             />
 
@@ -113,7 +138,7 @@ const AppStack = () => {
                 name="Details" 
                 component={BlogDetailsScreen} 
                 options={({ navigation }) => ({
-                    title: "Blog Post",                    
+                    title: "Blog Post",
                 })}
             />
 
@@ -121,9 +146,17 @@ const AppStack = () => {
                 name="EditDetails" 
                 component={BlogDetailsEditScreen} 
                 options={{
-                    title: "Edit Post",                    
+                    title: "Edit Post",
                 }}
-            /> 
+            />
+
+            <Stack.Screen 
+                name="BookMark" 
+                component={BookMarkScreen} 
+                options={{
+                    title: "Bookmarks",
+                }}
+            />
 
             <Stack.Screen 
                 name="MessageBoard" 
@@ -132,7 +165,7 @@ const AppStack = () => {
                     title: route.params.userName,
                     headerBackTitleVisible: false
                 })}
-            />            
+            />
         </Stack.Navigator>
     )
 }

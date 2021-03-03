@@ -13,11 +13,7 @@ import { COLORS, SIZES } from "../constants"
 import chatMessages from "../constants/chatData"
 
 const ChatMessagesScreen = ({navigation}) => {
-
-    /* Hooks 
-    const [messages, setMessages] = React.useState(chatMessages)
-    */
-   
+       
     return (
         <View style={styles.chatScreenContainerStyle}>                   
             <FlatList                
