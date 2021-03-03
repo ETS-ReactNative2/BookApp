@@ -42,8 +42,8 @@ function getHeaderTitle(route) {
       return 'Blog';
     case 'Book':
       return 'Book';
-    case 'Chat':
-      return 'Chat';
+    case 'Messages':
+      return 'Messages';
   }
 }
 
@@ -103,7 +103,7 @@ const AppStack = () => {
                                 name="bars" 
                                 size={22}
                                 style={{color: COLORS.white}}
-                                />
+                            />
                          </TouchableOpacity>                        
                     ),
                   })}
