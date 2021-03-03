@@ -29,8 +29,10 @@ export const COLORS = {
     smokeWhite: "E8E8E8",
 
     lightGray: "#E0E0E0",
+    mediumLightGray: "#333333",
     mediumGray: "#383838",
     darkgray: "#111111",
+    gray: "#666",
 
     turquoise: "#83d4d5",
     darkTurquoise: "#365657",

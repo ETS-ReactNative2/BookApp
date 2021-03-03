@@ -20,7 +20,8 @@ import BlogScreen from "../screens/blogScreen"
 import BlogDetailsScreen from "../screens/blogDetailsScreen"
 import BlogDetailsEditScreen from "../screens/blogDetailsEditScreen"
 import BookScreen from "../screens/bookScreen"
-import ChatScreen from "../screens/chatScreen"
+import ChatMessagesScreen from "../screens/chatMessagesScreen"
+import ChatMessageBoardScreen from "../screens/chatMessageBoardScreen"
 import LoginScreen from "../screens/loginScreen"
 
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
@@ -59,8 +60,8 @@ const AppDrawer = () => {
                 component={BookScreen}                                 
             />
             <Drawer.Screen 
-                name="Chat" 
-                component={ChatScreen}                 
+                name="Messages" 
+                component={ChatMessagesScreen}                 
             />
         </Drawer.Navigator>
     )
@@ -91,8 +92,8 @@ const AppStack = () => {
                 name="Drawer" 
                 component={AppDrawer}
                 options={({ route, navigation }) => ({
-                    title: 'Blog',
-                    headerTitle: getHeaderTitle(route),    
+                    title: '',
+                    headerTitle: getHeaderTitle(route),
                     headerLeft: () => (
                         <TouchableOpacity 
                             style={{paddingLeft: SIZES.padding * 2}}
@@ -106,7 +107,8 @@ const AppStack = () => {
                          </TouchableOpacity>                        
                     ),
                   })}
-            />                        
+            />
+
             <Stack.Screen 
                 name="Details" 
                 component={BlogDetailsScreen} 
@@ -121,6 +123,15 @@ const AppStack = () => {
                 options={{
                     title: "Edit Post",                    
                 }}
+            /> 
+
+            <Stack.Screen 
+                name="MessageBoard" 
+                component={ChatMessageBoardScreen} 
+                options={({route}) => ({
+                    title: route.params.userName,
+                    headerBackTitleVisible: false
+                })}
             />            
         </Stack.Navigator>
     )

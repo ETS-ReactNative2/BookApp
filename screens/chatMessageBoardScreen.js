@@ -4,7 +4,7 @@ import {
     Text,       
 } from "react-native"
 
-const ChatScreen = ({navigation}) => {
+const ChatMessageBoardScreen = ({navigation}) => {
 
     return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -14,4 +14,4 @@ const ChatScreen = ({navigation}) => {
     )
 }
 
-export default ChatScreen;
+export default ChatMessageBoardScreen;
