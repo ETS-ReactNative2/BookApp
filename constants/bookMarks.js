@@ -1,0 +1,3 @@
+bookMarks = []
+
+export default bookMarks;

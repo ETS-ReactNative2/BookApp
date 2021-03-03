@@ -51,14 +51,6 @@ const ChatMessagesScreen = ({navigation}) => {
                     </TouchableOpacity>
                 )}
             />
-            
-            
-
-            <TouchableOpacity
-                onPress={() => navigation.navigate('MessageBoard')}
-            >
-                <Text>Click here</Text>
-            </TouchableOpacity>
         </View>
     )
 }

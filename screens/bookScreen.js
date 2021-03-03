@@ -3,12 +3,14 @@ import {
     View,
     Text,
     FlatList,
-    TouchableOpacity     
+    TouchableOpacity,
+    Alert  
 } from "react-native"
 
 /* Constant imports */
 import { COLORS, SIZES, FONTS, icons, images } from "../constants"
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import bookMarks from "../constants/bookMarks"
 
 const BookScreen = ({navigation}) => {
 
@@ -36,7 +38,12 @@ const BookScreen = ({navigation}) => {
             <TouchableOpacity
                 style={{ padding: SIZES.padding, flexDirection: 'column' }}
                 onPress={() => {
-                    alert("Book")
+                    
+                    Alert.alert("Added to bookmarks!", "You can follow your favourite books in bookmarks page.");
+                    bookMarks.push({
+                        id: item.id,
+                        title: item.title
+                    })
                 }}
             >
                 {/* Book row */}
@@ -75,7 +82,7 @@ const BookScreen = ({navigation}) => {
 
                         {/* Title */}
                         <Text style={{ ...FONTS.h3, paddingHorizontal:SIZES.padding * 2, paddingBottom: SIZES.padding }}>
-                            Book{item.id} - {item.title}
+                            Book {item.id} - {item.title}
                         </Text>
                         
                         {/* Description */}
@@ -104,7 +111,7 @@ const BookScreen = ({navigation}) => {
     }
 
     return (
-        <View style={{flex: 1}}>
+        <View style={{flex: 1}}>            
             <FlatList
                 data={books}
                 renderItem={renderItem}
