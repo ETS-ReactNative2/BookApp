@@ -4,7 +4,8 @@ import {
     Text,
     FlatList,
     TouchableOpacity,
-    Alert  
+    Alert,
+    StyleSheet
 } from "react-native"
 
 /* Constant imports */
@@ -12,10 +13,9 @@ import { COLORS, SIZES, FONTS, icons, images } from "../constants"
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import bookMarks from "../constants/bookMarks"
 
-const BookScreen = ({navigation}) => {
+const BookScreen = () => {
 
-    /* Hooks */
-    /* const [currentBookMarks, setCurrentBookMarks] = React.useState(bookMarks) */
+    /* Hooks */    
     const [books, setBooks] = React.useState([])
 
     React.useEffect(() => {
@@ -51,104 +51,103 @@ const BookScreen = ({navigation}) => {
     const renderItem = ({item}) => {
         return (
             <TouchableOpacity
-                style={{ padding: SIZES.padding, flexDirection: 'column' }}
+                style={styles.bookScreenBookTouchableStyle}
                 onPress={() => {                                        
-                    addBookMark(item)
-                    /* add() */
+                    addBookMark(item)                    
                 }}
             >
                 {/* Book row */}
-                <View
-                    style={{                        
-                        flexDirection: 'row',
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',                        
-                    }}
-                >   
-
+                <View style={styles.bookScreenBookRowStyle}>   
                     {/* Book */}
-                    <View
-                        style={{                         
-                            height: 60,
-                            width: 60,
-                            backgroundColor: COLORS.lightBlue,
-                            borderRadius: 35,
-                            marginBottom: SIZES.padding * 1.6, 
-                            marginLeft: SIZES.padding,
-                            flexDirection: 'column',
-                            justifyContent: "center",
-                            alignItems: "center"
-                        }}                            
-                    >     
+                    <View style={styles.bookScreenBookIconWrapperStyle}>
                         <FontAwesome 
                             name="book" 
                             size={34}
-                            style={{color: COLORS.gray}}
+                            style={{color: COLORS.blue}}
                         />                         
                     </View>
-                    
-                    
+                                        
                     {/* Title and description column */}
-                    <View style={{ flexDirection: 'column'}}>
-
+                    <View>
                         {/* Title */}
-                        <Text style={{ ...FONTS.h3, paddingHorizontal:SIZES.padding * 2, paddingBottom: SIZES.padding }}>
+                        <Text style={styles.bookScreenBookTitleStyle}>
                             Book {item.id} - {item.title}
                         </Text>
                         
                         {/* Description */}
-                        <View style={{ flexDirection: 'row', paddingBottom: SIZES.padding * 2}}>
-                            <Text style={{ paddingLeft:SIZES.padding * 2}}>{item.description}</Text>
-                            <Text style={{ }}>{item.description}</Text>
-                            <Text style={{ }}>{item.description}</Text>    
-                        </View>
-                        
+                        <View style={styles.bookScreenBookDescriptionWrapperStyle}>
+                            <Text style={styles.bookScreenBookDescriptionTextStyle}>{item.description}</Text>
+                            <Text style={styles.bookScreenBookDescriptionTextStyle}>{item.description}</Text>
+                            <Text style={styles.bookScreenBookDescriptionTextStyle}>{item.description}</Text>
+                        </View>                        
                     </View>
                 </View>
                 
                 {/* Separator */}
-                <View style={{ 
-                        alignSelf: 'flex-start',
-                        width: SIZES.width * 0.95,
-                        borderBottomWidth: 1,
-                        borderBottomColor: "#cccccc",
-                        
-                    }}>
-
-                 </View>
-
+                <View style={styles.bookScreenBookRowSeparatorStyle}/>
+                 
             </TouchableOpacity>
         )
     }
-    const renderBItem = ({item}) => {
-        return (
-            <View>
-                <Text>Book {item.id} - {item.title}</Text>
-            </View>
-        )
-    }
+
     return (
-        <View style={{flex: 1}}>
-           {/*  <FlatList
-                data={currentBookMarks}
-                renderItem={renderBItem}
-                keyExtractor={item => `${item.id}`}
-                showsVerticalScrollIndicator={true}
-                style={{                    
-                    marginVertical: SIZES.padding * 1.1
-                }}
-            /> */}
+        <View style={{flex: 1}}>           
             <FlatList
                 data={books}
                 renderItem={renderItem}
                 keyExtractor={item => `${item.id}`}
                 showsVerticalScrollIndicator={true}
-                style={{                    
-                    marginVertical: SIZES.padding * 1.1
-                }}
+                style={styles.bookScreenBookListStyle}
             />
         </View>
     )
 }
+
+/* Book screen style elements */
+const styles = StyleSheet.create({
+    bookScreenBookTouchableStyle: {
+        padding: SIZES.padding, 
+        flexDirection: 'column'
+    },
+    bookScreenBookRowStyle: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
+    bookScreenBookIconWrapperStyle: {
+        height: 60,
+        width: 60,
+        backgroundColor: COLORS.lightBlue,
+        borderRadius: 35,
+        marginBottom: SIZES.padding * 1.6, 
+        marginLeft: SIZES.padding,
+        flexDirection: 'column',
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    bookScreenBookTitleStyle: {
+        ...FONTS.h3, 
+        paddingHorizontal:SIZES.padding * 2, 
+        paddingBottom: SIZES.padding, 
+        paddingTop: SIZES.padding * 0.5
+    },
+    bookScreenBookDescriptionWrapperStyle: {
+        flexDirection: 'row', 
+        paddingBottom: SIZES.padding * 2,
+        paddingLeft:SIZES.padding * 2
+    },
+    bookScreenBookDescriptionTextStyle: {
+        color: COLORS.gray,   
+    },
+    bookScreenBookRowSeparatorStyle: {
+        alignSelf: 'flex-start',
+        width: SIZES.width * 0.95,
+        borderBottomWidth: 1,
+        borderBottomColor: COLORS.lightGray,
+    },
+    bookScreenBookListStyle: {
+        marginVertical: SIZES.padding * 1.1
+    }
+})
 
 export default BookScreen;

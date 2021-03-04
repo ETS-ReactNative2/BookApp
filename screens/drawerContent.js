@@ -18,26 +18,27 @@ export function DrawerContent(props) {
     return (
         <View style={{ flex: 1}}>
             <DrawerContentScrollView>
-                
+                    {/* User header part */}
                     <View>
                         <View style={{flexDirection:'row', paddingLeft: SIZES.padding * 2}}>
+                            {/* User image */}
                             <Image 
                                 source={users.user2}
-                                style={{
-                                    width: 50,
-                                    height: 50,
-                                    borderRadius: 50,
-
-                                }}
+                                style={styles.drawerUserImgStyle}
                             />
-                            <View style={{marginLeft:SIZES.padding * 2, flexDirection:'column', paddingTop: SIZES.padding * 0.5}}>
-                                <Text style={{...FONTS.h3}}>John Doe</Text>
-                                <Text style={{...FONTS.body4, color: COLORS.mediumGray}}>@j_doe</Text>
+
+                            {/* User name, Twitter */}
+                            <View style={styles.drawerUserNameWrapperStyle}>
+                                <Text style={styles.drawerUserNameStyle}>John Doe</Text>
+                                <Text style={styles.drawerUserTwitterStyle}>@j_doe</Text>
                             </View>
                         </View>                        
                     </View>
-               
-                <View style={{ paddingLeft: SIZES.padding * 1.2, paddingTop: SIZES.padding * 3}}>
+
+                {/* Drawer Items */}
+                <View style={styles.drawerItemsWrapperStyle}>
+
+                    {/* Blog */}
                     <DrawerItem
                         icon={() => (
                             <FontAwesome 
@@ -47,8 +48,11 @@ export function DrawerContent(props) {
                             /> 
                         )}
                         label="Blog"
-                        onPress={() => {props.navigation.navigate("Blog")}}                                                
+                        onPress={() => {props.navigation.navigate("Blog")}}
+                        style={styles.drawerBlogItemStyle}
                     />
+
+                    {/* Book */}
                     <DrawerItem
                         icon={() => (
                             <FontAwesome 
@@ -57,9 +61,12 @@ export function DrawerContent(props) {
                                 style={{color: COLORS.blue}}
                             /> 
                         )}
-                        label="Book"
+                        label="Books"
                         onPress={() => {props.navigation.navigate("Book")}}
+                        style={styles.drawerBookItemStyle}
                     />
+
+                    {/* Chat */}
                     <DrawerItem
                         icon={() => (
                             <FontAwesome 
@@ -70,9 +77,43 @@ export function DrawerContent(props) {
                         )}
                         label="Messages"
                         onPress={() => {props.navigation.navigate("Messages")}}
+                        
                     />
                 </View>
             </DrawerContentScrollView>
         </View>
-    )
+    )    
 }
+
+
+/* Drawer style elements */
+const styles = StyleSheet.create({
+    drawerUserImgStyle: {
+        width: 50,
+        height: 50,
+        borderRadius: 50,
+    },
+    drawerUserNameWrapperStyle: {
+        marginLeft:SIZES.padding * 2, 
+        flexDirection:'column', 
+        paddingTop: SIZES.padding * 0.5
+    },
+    drawerUserNameStyle: {
+        ...FONTS.h3
+    },
+    drawerUserTwitterStyle: {
+        ...FONTS.body4, 
+        color: COLORS.mediumGray        
+    },
+    drawerItemsWrapperStyle: {
+        paddingLeft: SIZES.padding * 1.2, 
+        paddingTop: SIZES.padding * 3
+    },
+    drawerBlogItemStyle: {
+        paddingBottom: SIZES.padding, 
+        paddingLeft: 5
+    },
+    drawerBookItemStyle: {
+        paddingBottom: SIZES.padding
+    }
+})

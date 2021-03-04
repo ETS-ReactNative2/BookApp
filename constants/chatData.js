@@ -1,5 +1,6 @@
 import { users } from "../constants"
 
+/* Chat messages JSON */
 const chatMessages = [
     {
       id: '1',

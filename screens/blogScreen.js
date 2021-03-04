@@ -13,9 +13,7 @@ import { COLORS, SIZES, FONTS, icons } from "../constants"
 import blogPostData from "../constants/blogData"
 
 const BlogScreen = ({navigation}) => {
-
-    const [blogPost, setBlogPost] = React.useState(blogPostData)
-
+    
     /* Header component */
     function renderBlogHeader() {
         return (
@@ -83,7 +81,7 @@ const BlogScreen = ({navigation}) => {
                 ListHeaderComponent={BlogPostComponent}
                 contentContainerStyle={{ paddingHorizontal: SIZES.padding * 3 }}
                 numColumns={1}                
-                data={blogPost}
+                data={blogPostData}
                 keyExtractor={item => `${item.id}`}
                 renderItem={renderItem}
                 showsVerticalScrollIndicator={false}

@@ -1,7 +1,6 @@
 import React, {useState, useEffect, useCallback} from "react";
 import {
-    View,
-    Text,
+    View,    
     StyleSheet,       
 } from "react-native"
 
@@ -11,9 +10,10 @@ import { GiftedChat, Bubble, Send } from 'react-native-gifted-chat'
 import { COLORS, SIZES } from "../constants"
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
-const ChatMessageBoardScreen = ({navigation}) => {
+const ChatMessageBoardScreen = () => {
     const [messages, setMessages] = useState([]);
 
+    /* Default messages */
     useEffect(() => {
         setMessages([
         {
@@ -39,10 +39,12 @@ const ChatMessageBoardScreen = ({navigation}) => {
         ])
     }, [])
 
+    /* Send function */
     const onSend = useCallback((messages = []) => {
         setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
     }, [])
 
+    /* Message bubles layout */
     const renderBubble = (props) => {
         return (
             <Bubble
@@ -64,6 +66,7 @@ const ChatMessageBoardScreen = ({navigation}) => {
         )
     }
 
+    /* Send button layout */
     const renderSend = (props) => {
         return (
             <Send {...props}> 
@@ -79,6 +82,7 @@ const ChatMessageBoardScreen = ({navigation}) => {
         )
     }
 
+    /* Scroll icon layout */
     const renderScrollToBottomComponent = () => {
         return (            
             <FontAwesome
@@ -88,6 +92,7 @@ const ChatMessageBoardScreen = ({navigation}) => {
             />            
         )
     }
+
     return (
         <GiftedChat
             messages={messages}
@@ -106,6 +111,7 @@ const ChatMessageBoardScreen = ({navigation}) => {
 
 export default ChatMessageBoardScreen;
 
+/* Chat message component styles */
 const styles = StyleSheet.create({
     chatMessageScreenSendIconViewStyle: {
         padding: SIZES.padding,

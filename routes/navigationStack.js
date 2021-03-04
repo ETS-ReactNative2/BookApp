@@ -1,8 +1,7 @@
 /* React imports */
 import React from 'react';
 import {
-    TouchableOpacity,
-    Text    
+    TouchableOpacity,    
 } from "react-native"
 
 /* Redux import */
@@ -11,8 +10,8 @@ import store from '../reducer/store'
 
 /* Navigation imports */
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator, HeaderHeightContext } from '@react-navigation/stack';
-import { createDrawerNavigator, DrawerContentScrollView } from '@react-navigation/drawer';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerActions } from '@react-navigation/native';
 
 /* Screen imports */
@@ -20,7 +19,7 @@ import BlogScreen from "../screens/blogScreen"
 import BlogDetailsScreen from "../screens/blogDetailsScreen"
 import BlogDetailsEditScreen from "../screens/blogDetailsEditScreen"
 import BookScreen from "../screens/bookScreen"
-import BookMarkScreen from "../screens/bookBookMarkScreen"
+import BookMarkScreen from "../screens/bookMarkScreen"
 import ChatMessagesScreen from "../screens/chatMessagesScreen"
 import ChatMessageBoardScreen from "../screens/chatMessageBoardScreen"
 import LoginScreen from "../screens/loginScreen"
@@ -29,7 +28,7 @@ import { DrawerContent } from '../screens/drawerContent'
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 /* Constant imports */
-import { COLORS, SIZES, FONTS } from "../constants"
+import { COLORS, SIZES } from "../constants"
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 const Stack = createStackNavigator();
@@ -63,7 +62,7 @@ function getBookmarkNavigator(route, navigation) {
                 <FontAwesome 
                     name="bookmark" 
                     size={22}
-                    style={{color: COLORS.white, paddingRight: SIZES.padding * 2}}
+                    style={{color: COLORS.turquoise, paddingRight: SIZES.padding * 2}}
                 />
             </TouchableOpacity>
         );        
@@ -74,14 +73,19 @@ function getBookmarkNavigator(route, navigation) {
 const AppDrawer = () => {
     return (
         <Drawer.Navigator initialRouteName="Blog" drawerContent={props => <DrawerContent {...props} />}>
+            {/* Blog drawer item */}
             <Drawer.Screen
                 name="Blog"
                 component={BlogScreen}
             />
+
+            {/* Book drawer item */}
             <Drawer.Screen 
                 name="Book" 
                 component={BookScreen}
             />
+
+            {/* Messages drawer item */}
             <Drawer.Screen 
                 name="Messages" 
                 component={ChatMessagesScreen}
@@ -90,7 +94,7 @@ const AppDrawer = () => {
     )
 }
 
-/* Stack component */
+/* Stack navigator */
 const AppStack = () => {
     return (
         <Stack.Navigator 
@@ -104,13 +108,15 @@ const AppStack = () => {
                     fontSize: SIZES.h4
                 }
             }}            
-        >
+        >   
+            {/* Login stack */}
             <Stack.Screen 
                 name="Login"
                 component={LoginScreen}
                 options={{ title: 'Login'}}
             />
 
+            {/* Drawer stack inside the stack navigator */}
             <Stack.Screen 
                 name="Drawer"
                 component={AppDrawer}
@@ -134,7 +140,8 @@ const AppStack = () => {
                     )
                   })}
             />
-
+            
+            {/* Blog details stack */}
             <Stack.Screen 
                 name="Details" 
                 component={BlogDetailsScreen} 
@@ -143,6 +150,7 @@ const AppStack = () => {
                 })}
             />
 
+            {/* Blog details edit stack */}
             <Stack.Screen 
                 name="EditDetails" 
                 component={BlogDetailsEditScreen} 
@@ -151,6 +159,7 @@ const AppStack = () => {
                 }}
             />
 
+            {/* Bookmarks stack */}
             <Stack.Screen 
                 name="BookMark" 
                 component={BookMarkScreen} 
@@ -159,6 +168,7 @@ const AppStack = () => {
                 }}
             />
 
+            {/* Chat message stack */}
             <Stack.Screen 
                 name="MessageBoard" 
                 component={ChatMessageBoardScreen} 

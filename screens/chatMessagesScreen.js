@@ -57,6 +57,7 @@ const ChatMessagesScreen = ({navigation}) => {
 
 export default ChatMessagesScreen;
 
+/* Messages wall component styles */
 const styles = StyleSheet.create({
     chatScreenContainerStyle: {
         flex: 1,

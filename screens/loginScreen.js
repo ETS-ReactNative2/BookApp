@@ -4,9 +4,7 @@ import {
     Text,
     TextInput,
     Image,
-    TouchableOpacity,
-    KeyboardAvoidingView,
-    Platform,
+    TouchableOpacity,    
     ScrollView,
     StyleSheet    
 } from "react-native"
@@ -89,8 +87,7 @@ const LoginScreen = ({navigation}) => {
     }
 
     return (
-        <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : null}
+        <View            
             style={{ flex: 1 }}
             backgroundColor={COLORS.smokeWhite}
         >                           
@@ -99,14 +96,14 @@ const LoginScreen = ({navigation}) => {
                 {renderForm()}
                 {renderButton()}
             </ScrollView>        
-        </KeyboardAvoidingView>
+        </View>
     )
 }
 
 /* Login screen style elements */
 const styles = StyleSheet.create({
     loginScreenLogoViewStyle: {
-        height: 100,
+        height: 10,
         marginVertical: SIZES.padding * 14,        
         alignItems: 'center',
         justifyContent: 'center'

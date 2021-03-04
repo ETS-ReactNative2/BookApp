@@ -6,8 +6,7 @@ import {
     TextInput,
     Modal,
     TouchableWithoutFeedback,
-    FlatList,
-    KeyboardAvoidingView,
+    FlatList,    
     Button,
     StyleSheet
 
@@ -16,7 +15,7 @@ import {
 import { TouchableOpacity} from 'react-native-gesture-handler'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import blogPostData from "../constants/blogData"
-import { COLORS, SIZES, FONTS, icons, images } from "../constants"
+import { COLORS, SIZES, FONTS } from "../constants"
 
 const BlogDetailsEditScreen = ({ route, navigation }) => {
 
@@ -37,7 +36,7 @@ const BlogDetailsEditScreen = ({ route, navigation }) => {
     const [postText, setPostText] = React.useState('');    
 
     /* Edit Title Form component */
-    function renderEditTitleForm() {
+    function renderTitleForm() {
         return (    
             <View style={{ marginTop: SIZES.padding * 4, marginHorizontal: SIZES.padding * 2}}>
                 <Text style={{ color: COLORS.darkgray, ...FONTS.body3 }}>Add new post title:</Text>
@@ -54,7 +53,7 @@ const BlogDetailsEditScreen = ({ route, navigation }) => {
     }
 
     /* Form component */
-    function renderForm() {
+    function renderLabelForm() {
         return (
             <View style={{ marginTop: SIZES.padding * 2, marginHorizontal: SIZES.padding * 2 }}>
                 <Text style={{ color: COLORS.darkgray, ...FONTS.body3, paddingBottom: SIZES.padding }}>Select post label:</Text>
@@ -128,6 +127,7 @@ const BlogDetailsEditScreen = ({ route, navigation }) => {
         )
     }
 
+    /* Save button */
     function renderSaveButton() {
         return (
             <View 
@@ -148,18 +148,14 @@ const BlogDetailsEditScreen = ({ route, navigation }) => {
     }
     
     return (                
-        <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : null}
-            style={{ flex: 1 }}
-        >            
+        <View style={{ flex: 1 }}>            
             <ScrollView>
-                {renderEditTitleForm()}                
-                {renderForm()}  
+                {renderTitleForm()}                
+                {renderLabelForm()}  
                 {renderSaveButton()}              
-            </ScrollView>
-            
+            </ScrollView>            
             {renderLabelModal()}
-        </KeyboardAvoidingView>
+        </View>
     )
 }
 
