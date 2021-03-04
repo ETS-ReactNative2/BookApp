@@ -8,12 +8,12 @@ import {
     TouchableWithoutFeedback,
     FlatList,
     KeyboardAvoidingView,
-    TouchableOpacity,
     Button,
     StyleSheet
 
 } from "react-native"
 
+import { TouchableOpacity} from 'react-native-gesture-handler'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import blogPostData from "../constants/blogData"
 import { COLORS, SIZES, FONTS, icons, images } from "../constants"
@@ -24,7 +24,7 @@ const BlogDetailsEditScreen = ({ route, navigation }) => {
     const labelCategory = [
         { name: "nature" },
         { name: "ocean" },
-        { name: "culture" }            
+        { name: "culture" }
     ]
 
     /* Route item parameter for link post and details */
@@ -65,7 +65,7 @@ const BlogDetailsEditScreen = ({ route, navigation }) => {
                         onPress={() => setModalVisible(true)}
                     >
                         <View style={{ justifyContent: 'center' }}>
-                            <Text>{selectedLabel?.name ? selectedLabel.name : editItem.label}</Text>
+                            <Text>{selectedLabel?.name ? selectedLabel.name : editItem.label}</Text>                            
                         </View>
 
                         <View style={styles.editScreenIconStyle}>
@@ -93,9 +93,10 @@ const BlogDetailsEditScreen = ({ route, navigation }) => {
                         setModalVisible(false)                                                
                         blogPostData[editItem.id-1].label = item.name
                     }}
-                >                   
-                    <Text 
-                        style={styles.editScreenDropDownTextStyle}>{item.name}</Text>
+                >
+                    <Text style={styles.editScreenDropDownTextStyle}>
+                        {item.name}
+                    </Text>
                 </TouchableOpacity>
             )
         }
@@ -116,7 +117,7 @@ const BlogDetailsEditScreen = ({ route, navigation }) => {
                             <FlatList
                                 data={labelCategory}
                                 renderItem={renderItem}
-                                keyExtractor={item => `${item.name}`}
+                                keyExtractor={item => item.name}
                                 showsVerticalScrollIndicator={false}
                                 style={styles.editScreenDropDownFlatListStyle}
                             />                            

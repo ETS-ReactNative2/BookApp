@@ -1,3 +1,3 @@
-bookMarks = []
+var bookMarks = []
 
 export default bookMarks;

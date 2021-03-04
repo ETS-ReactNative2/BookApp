@@ -15,6 +15,7 @@ import bookMarks from "../constants/bookMarks"
 const BookScreen = ({navigation}) => {
 
     /* Hooks */
+    /* const [currentBookMarks, setCurrentBookMarks] = React.useState(bookMarks) */
     const [books, setBooks] = React.useState([])
 
     React.useEffect(() => {
@@ -32,18 +33,28 @@ const BookScreen = ({navigation}) => {
                 setBooks(bookData)                
             })
     }, [])
-    
+        
+    function addBookMark (bookMark) {
+        
+        /* Check book key in the bookMarks array */        
+        if (bookMarks.hasOwnProperty(bookMark.id)) {            
+            Alert.alert("Book match.","Book is already in Bookmark!");            
+        } else {
+            bookMarks.push({
+                id: bookMark.id,
+                title: bookMark.title
+            })
+            Alert.alert("Added to bookmarks!", "You can follow your favourite books in bookmarks page.");
+        }          
+    }
+
     const renderItem = ({item}) => {
         return (
             <TouchableOpacity
                 style={{ padding: SIZES.padding, flexDirection: 'column' }}
-                onPress={() => {
-                    
-                    Alert.alert("Added to bookmarks!", "You can follow your favourite books in bookmarks page.");
-                    bookMarks.push({
-                        id: item.id,
-                        title: item.title
-                    })
+                onPress={() => {                                        
+                    addBookMark(item)
+                    /* add() */
                 }}
             >
                 {/* Book row */}
@@ -109,9 +120,24 @@ const BookScreen = ({navigation}) => {
             </TouchableOpacity>
         )
     }
-
+    const renderBItem = ({item}) => {
+        return (
+            <View>
+                <Text>Book {item.id} - {item.title}</Text>
+            </View>
+        )
+    }
     return (
-        <View style={{flex: 1}}>            
+        <View style={{flex: 1}}>
+           {/*  <FlatList
+                data={currentBookMarks}
+                renderItem={renderBItem}
+                keyExtractor={item => `${item.id}`}
+                showsVerticalScrollIndicator={true}
+                style={{                    
+                    marginVertical: SIZES.padding * 1.1
+                }}
+            /> */}
             <FlatList
                 data={books}
                 renderItem={renderItem}
