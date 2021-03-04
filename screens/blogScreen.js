@@ -5,7 +5,8 @@ import {
     Image,
     TouchableOpacity,
     FlatList,
-    StyleSheet
+    StyleSheet,
+    Linking
 } from "react-native"
 
 import { COLORS, SIZES, FONTS, icons } from "../constants"
@@ -23,7 +24,9 @@ const BlogScreen = ({navigation}) => {
                     <Text style={styles.blogScreenHeaderTitleTextStyle}>Latest Blogposts</Text>
                     <View style={styles.blogScreenHeaderRowViewStyle}>
                         <Text style={{ ...FONTS.body2, color: COLORS.blue }}>from Maptia</Text>
-                        <TouchableOpacity style={styles.blogScreenHeaderInfoTouchableStyle}>
+                        <TouchableOpacity style={styles.blogScreenHeaderInfoTouchableStyle}
+                            onPress={() => {Linking.openURL('https://maptia.com/')}}
+                        >
                             <Image
                                 source={icons.info}
                                 style={styles.blogScreenHeaderInfoIconStyle}

@@ -12,7 +12,7 @@ import store from '../reducer/store'
 /* Navigation imports */
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, HeaderHeightContext } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerContentScrollView } from '@react-navigation/drawer';
 import { DrawerActions } from '@react-navigation/native';
 
 /* Screen imports */
@@ -24,6 +24,7 @@ import BookMarkScreen from "../screens/bookBookMarkScreen"
 import ChatMessagesScreen from "../screens/chatMessagesScreen"
 import ChatMessageBoardScreen from "../screens/chatMessageBoardScreen"
 import LoginScreen from "../screens/loginScreen"
+import { DrawerContent } from '../screens/drawerContent'
 
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
@@ -72,18 +73,18 @@ function getBookmarkNavigator(route, navigation) {
 /* Drawer component */
 const AppDrawer = () => {
     return (
-        <Drawer.Navigator initialRouteName="Blog">
+        <Drawer.Navigator initialRouteName="Blog" drawerContent={props => <DrawerContent {...props} />}>
             <Drawer.Screen
                 name="Blog"
-                component={BlogScreen}                
+                component={BlogScreen}
             />
             <Drawer.Screen 
                 name="Book" 
-                component={BookScreen}                                                    
+                component={BookScreen}
             />
             <Drawer.Screen 
                 name="Messages" 
-                component={ChatMessagesScreen}                 
+                component={ChatMessagesScreen}
             />
         </Drawer.Navigator>
     )
