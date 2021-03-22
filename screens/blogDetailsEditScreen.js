@@ -8,11 +8,11 @@ import {
     TouchableWithoutFeedback,
     FlatList,    
     Button,
-    StyleSheet
+    StyleSheet,
+    TouchableOpacity
 
 } from "react-native"
 
-import { TouchableOpacity} from 'react-native-gesture-handler'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import blogPostData from "../constants/blogData"
 import { COLORS, SIZES, FONTS } from "../constants"
@@ -87,7 +87,7 @@ const BlogDetailsEditScreen = ({ route, navigation }) => {
             return (
                 <TouchableOpacity
                     style={{ padding: SIZES.padding, flexDirection: 'row' }}
-                    onPress={() => {                        
+                    onPress={() => {                                                
                         setSelectedLabel(item)
                         setModalVisible(false)                                                
                         blogPostData[editItem.id-1].label = item.name
